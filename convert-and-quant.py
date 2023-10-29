@@ -37,6 +37,7 @@ def convert_bin_to_safetensors(fp16_model_dir):
                 print(f"Error in converting {f}: {e}")
 
 def clean_up_leftovers(directory):
+    print("Remove out_tensor/")
     shutil.rmtree(os.path.join(directory, 'out_tensor'), ignore_errors=True)
     files_to_remove = ['cal_data.safetensors', 'job.json', 'input_states.safetensors', 'output_states.safetensors']
     for file_name in files_to_remove:

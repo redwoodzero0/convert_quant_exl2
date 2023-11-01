@@ -77,9 +77,12 @@ else:
     print(f"No previous measurement.json file found")
     measurement_arg = []
 
-# Run the conversion
-subprocess.run(['python', './convert.py', '-i', fp16_model_dir, '-o', quant_dir, '-c', f'./{cal_dataset}', '-b', bits_per_weight, '-hb', head_bits,'-gr', gpu_rows, '-l', token_length, '-ml', measurement_length] + measurement_arg)
-
-copy_model_config()
-save_measurement_file()
-clean_up_leftovers(quant_dir)
+try:
+    subprocess.run(['python', './convert.py', '-i', fp16_model_dir, '-o', quant_dir, '-c', f'./{cal_dataset}', '-b', bits_per_weight, '-hb', head_bits,'-gr', gpu_rows, '-l', token_length, '-ml', measurement_length] + measurement_arg)
+except subprocess.CalledProcessError as e:
+    print("### ERROR ###")
+    print(e)
+else:
+    copy_model_config()
+    save_measurement_file()
+    clean_up_leftovers(quant_dir)

@@ -1,0 +1,8 @@
+{
+    "cal_dataset": "0001.parquet",
+    "bits_per_weight": "4.65",
+    "head_bits": "8",
+    "gpu_rows": "0",
+    "token_length": "2048",
+    "measurement_length": "2048"
+}

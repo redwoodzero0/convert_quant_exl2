@@ -3,19 +3,26 @@
 import os
 import subprocess
 import shutil
+import json
+import argparse 
+
+parser = argparse.ArgumentParser(description='Convert and Quantize fp16 models to Exllama2.')
+parser.add_argument('model_path', type=str, help='Path to FP16 model directory')
+args = parser.parse_args()
+
+with open("util\settings.json", 'r') as f:
+    config = json.load(f)
+
 
 # https://github.com/turboderp/exllamav2/blob/master/doc/convert.md
-# Edit these values below
-fp16_model_dir = r"/home/fp16/model/"
-quant_dir = r"/home/quants/"
-cal_dataset = "0001.parquet" # https://huggingface.co/datasets/wikitext
-bits_per_weight = "4.65" # Default = 4.65
-head_bits = "8" # Default = 6
-gpu_rows = "0" # Default = 0
-token_length = "2048" # Default = 2048
-measurement_length = "2048" # Default = 2048
-# End edit section
-quant_dir = os.path.join(quant_dir, f"{os.path.basename(fp16_model_dir)}-{bits_per_weight}bpw-h{head_bits}-exl2")
+fp16_model_dir = args.model_path
+cal_dataset = config["cal_dataset"] # https://huggingface.co/datasets/wikitext
+bits_per_weight = config["bits_per_weight"] # Default = 4.65
+head_bits = config["head_bits"] # Default = 6
+gpu_rows = config["gpu_rows"] # Default = 0
+token_length = config["token_length"] # Default = 2048
+measurement_length = config["measurement_length"] # Default = 2048
+quant_dir = os.path.join(fp16_model_dir, f"{os.path.basename(fp16_model_dir)}-{bits_per_weight}bpw-h{head_bits}-exl2")
 util_dir = os.path.dirname(os.path.abspath(__file__))
 exllama_dir = os.path.dirname(util_dir)
 measurement_file = os.path.join(exllama_dir, f"measurement-{os.path.basename(fp16_model_dir)}.json")

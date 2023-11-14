@@ -7,3 +7,5 @@ python convert-and-quant.py path/to/model
 ## Todo
 
 Batch Jobs
+
+Error handling, do not remove intermediary files so that jobs can be resumed 

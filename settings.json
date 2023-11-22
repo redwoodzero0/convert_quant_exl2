@@ -5,5 +5,5 @@
     "gpu_rows": "0",
     "token_length": "2048",
     "measurement_length": "2048",
-    "rope_alpha": 1.0
+    "rope_alpha": "1.0"
 }

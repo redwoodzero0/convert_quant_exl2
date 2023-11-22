@@ -87,7 +87,7 @@ else:
     measurement_arg = []
 
 try:
-    subprocess.run(['python', './convert.py', '-i', fp16_model_dir, '-o', quant_dir, '-c', f'./{cal_dataset}', '-b', bits_per_weight, '-hb', head_bits,'-gr', gpu_rows, '-l', token_length, '-ml', measurement_length], '-ra', rope_alpha]  + measurement_arg)
+    subprocess.run(['python', './convert.py', '-i', fp16_model_dir, '-o', quant_dir, '-c', f'./{cal_dataset}', '-b', bits_per_weight, '-hb', head_bits,'-gr', gpu_rows, '-l', token_length, '-ml', measurement_length, '-ra', rope_alpha]  + measurement_arg)
 except subprocess.CalledProcessError as e:
     print("### ERROR ###")
     print(e)

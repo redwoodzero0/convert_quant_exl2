@@ -23,6 +23,7 @@ head_bits = config["head_bits"] # Default = 6
 gpu_rows = config["gpu_rows"] # Default = 0
 token_length = config["token_length"] # Default = 2048
 measurement_length = config["measurement_length"] # Default = 2048
+rope_alpha = config["rope_alpha"] # Default = 1
 quant_dir = os.path.join(fp16_model_dir, f"{os.path.basename(fp16_model_dir)}-{bits_per_weight}bpw-h{head_bits}-exl2")
 util_dir = os.path.dirname(os.path.abspath(__file__))
 exllama_dir = os.path.dirname(util_dir)
@@ -86,7 +87,7 @@ else:
     measurement_arg = []
 
 try:
-    subprocess.run(['python', './convert.py', '-i', fp16_model_dir, '-o', quant_dir, '-c', f'./{cal_dataset}', '-b', bits_per_weight, '-hb', head_bits,'-gr', gpu_rows, '-l', token_length, '-ml', measurement_length] + measurement_arg)
+    subprocess.run(['python', './convert.py', '-i', fp16_model_dir, '-o', quant_dir, '-c', f'./{cal_dataset}', '-b', bits_per_weight, '-hb', head_bits,'-gr', gpu_rows, '-l', token_length, '-ml', measurement_length], '-ra', rope_alpha]  + measurement_arg)
 except subprocess.CalledProcessError as e:
     print("### ERROR ###")
     print(e)

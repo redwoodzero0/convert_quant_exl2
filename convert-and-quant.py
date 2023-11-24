@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser(description='Convert and Quantize fp16 models t
 parser.add_argument('model_path', type=str, help='Path to FP16 model directory')
 args = parser.parse_args()
 
-settings_path = os.path.join('util', 'settings.json')
+settings_path = os.path.join('/workspace/exllamav2/util', 'settings.json')
 with open(settings_path, 'r') as f:
     config = json.load(f)
 

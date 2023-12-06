@@ -4,5 +4,6 @@
     "head_bits": "8",
     "gpu_rows": "0",
     "token_length": "4096",
-    "measurement_length": "4096"
+    "measurement_length": "4096",
+    "rope_alpha": "1.0"
 }
